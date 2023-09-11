@@ -55,7 +55,7 @@ export class CreateController {
     // 게시물 작성 로직을 추가
     // 데이터베이스에 게시물 저장 등의 작업을 수행합니다.
     // 실제 코드를 추가하세요.
-    
+    // dkfrpTtmqslek.
     // 작성 완료 후 게시판 페이지로 리디렉션합니다.
     return res.redirect('/c_index'); // 리디렉션
   }
