@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>게시판</title>
+</head>
+<body>
+<h1>게시판</h1>
+
+<a href="/c_create">게시물 작성</a>
+<a href="/c_login">로그인</a>
+<a href="/c_register">회원가입</a>
+<ul>
+    <% for (let post of posts) { %>
+        <li>
+            <a href="/c_post/<%= post._id %>"><%= post.title %></a>
+        </li>
+    <% } %>
+</ul>
+</body>
+</html>
+
+

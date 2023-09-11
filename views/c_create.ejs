@@ -1,0 +1,20 @@
+<!-- c_create.ejs -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>게시물 작성</title>
+</head>
+<body>
+<h1>게시물 작성</h1>
+<form action="/c_create" method="POST">
+    <label for="title">제목:</label>
+    <input type="text" id="title" name="title" required value="<%= formData.title %>">
+    <br>
+    <label for="content">내용:</label>
+    <textarea id="content" name="content" rows="4" required><%= formData.content %></textarea>
+    <br>
+    <button type="submit">작성</button>
+</form>
+<a href="/c_index">돌아가기</a>
+</body>
+</html>
