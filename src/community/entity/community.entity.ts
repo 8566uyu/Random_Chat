@@ -1,9 +1,9 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class Chat {
+export class Community {
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
   
   @Column()
   pw: string;

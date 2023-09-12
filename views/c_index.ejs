@@ -3,12 +3,20 @@
 <head>
     <title>게시판</title>
 </head>
-<body>
-<h1>게시판</h1>
+<body >
+<h1 align="center" >게시판</h1>
+<!--<div display="flex">-->
+<div align="right">
+    <a href="/c_login">로그인</a>
+    <a href="/c_register">회원가입</a>
+</div>
+<br>
+<div align="center">
+<a href="/c_create" >게시물 작성</a>
+</div>
+<br>
 
-<a href="/c_create">게시물 작성</a>
-<a href="/c_login">로그인</a>
-<a href="/c_register">회원가입</a>
+<!--</div>-->
 <ul>
     <% for (let post of posts) { %>
         <li>

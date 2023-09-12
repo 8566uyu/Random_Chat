@@ -1,5 +1,7 @@
-import { Controller, Get, Post, Render, Req, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Render, Req, Res } from '@nestjs/common';
 import { Request, Response } from 'express';
+
+
 
 @Controller('c_index')
 export class CommunityController {
@@ -35,6 +37,37 @@ export class CommunityController {
     ];
   }
   
+  // constructor(private communityService: CommunityService){};
+  //
+  // @Get()
+  // async findAll(): Promise<Community[]> {
+  //   return this.communityService.findAll();
+  // }
+  //
+  // @Get(':id')
+  // findOne(@Param('id') id: number): Promise<Community | undefined> {
+  //   return this.communityService.findOne(id);
+  // }
+  //
+  // @Get()
+  // findAll(): Promise<Community[]> {
+  //   return this.communityService.findAll();
+  // }
+  //
+  // @Post()
+  // create(@Body() community: Community): Promise<Community> {
+  //   return this.communityService.create(community);
+  // }
+  //
+  // @Put(':id')
+  // update(@Param('id') id: number, @Body() community: Community): Promise<void> {
+  //   return this.communityService.update(id, community);
+  // }
+  //
+  // @Delete(':id')
+  // remove(@Param('id') id: number): Promise<void> {
+  //   return this.communityService.remove(id);
+  // }
 }
 
 
@@ -60,3 +93,8 @@ export class CreateController {
     return res.redirect('/c_index'); // 리디렉션
   }
 }
+
+
+
+
+
