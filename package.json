@@ -26,11 +26,13 @@
   "dependencies": {
     "@nestjs/common": "^8.0.0",
     "@nestjs/core": "^8.0.0",
+    "@nestjs/jwt": "^10.1.1",
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/platform-socket.io": "^8.0.3",
     "@nestjs/platform-ws": "^8.0.3",
     "@nestjs/typeorm": "^8.0.2",
     "@nestjs/websockets": "^8.0.3",
+    "@types/bcrypt": "^5.0.0",
     "@types/ws": "^7.4.6",
     "bcrypt": "^5.1.1",
     "mo": "^1.7.3",

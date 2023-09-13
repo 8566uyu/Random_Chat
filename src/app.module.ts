@@ -3,10 +3,10 @@ import { ChatBackEndModule } from './chatBackEnd/chatBackEnd.module';
 import { ChatFrontEndModule } from './chatFrontEnd/chatFrontEnd.module';
 import {
     CommunityController,
-    CreateController,
-    LoginController,
-    RegisterController
+    CreateController
 } from './community/community.controller';
+import { LoginController,
+    RegisterController } from './auth/auth.controller'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { Community } from './community/entity/community.entity'
 import { AuthModule } from './auth/auth.module';
