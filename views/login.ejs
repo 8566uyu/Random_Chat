@@ -1,23 +1,3 @@
-<!--<!DOCTYPE html>-->
-<!--<html>-->
-<!--<head>-->
-<!--    <title>로그인</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<h1>로그인</h1>-->
-<!--<form action="c_login" method="POST">-->
-<!--    <label for="username">아이디:</label>-->
-<!--    <input type="text" id="username" name="username" required>-->
-<!--    <br>-->
-<!--    <label for="password">비밀번호:</label>-->
-<!--    <input type="password" id="password" name="password" required>-->
-<!--    <br>-->
-<!--    <button type="submit">로그인</button>-->
-<!--</form>-->
-<!--<a href="/">돌아가기</a>-->
-<!--</body>-->
-<!--</html>-->
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +5,7 @@
 </head>
 <body>
 <h1>로그인</h1>
-<form action="c_login" method="POST" id="loginForm">
+<form action="/api/login" method="POST" id="loginForm"> <!-- 백엔드 컨트롤러의 루트와 일치하도록 action 속성 업데이트 -->
     <label for="username">아이디:</label>
     <input type="text" id="username" name="username" required>
     <br>
@@ -34,7 +14,7 @@
     <br>
     <button type="submit">로그인</button>
 </form>
-<a href="/">돌아가기</a>
+<a href="/c_index">돌아가기</a>
 
 <script>
   // 로그인 폼에 이벤트 리스너 추가
@@ -45,7 +25,7 @@
     const password = document.getElementById('password').value;
 
     // 서버로 POST 요청을 보냅니다.
-    fetch('/c_login', {
+    fetch('/api/login', { // 백엔드 루트와 일치하도록 URL 업데이트
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -55,17 +35,19 @@
     .then(response => {
       if (response.ok) {
         console.log('로그인 성공');
-        // 로그인 성공 후 처리를 추가하세요 (예: 페이지 리디렉션)
+
+        window.location.href = '/c_index';
+
       } else {
         console.error('로그인 실패');
-        // 로그인 실패 후 처리를 추가하세요 (예: 오류 메시지 표시)
+        alert('로그인 정보가 올바르지 않습니다. 다시 시도하세요.');
       }
     })
     .catch(error => {
       console.error('오류 발생', error);
-      // 오류 처리를 추가하세요
     });
   });
 </script>
+
 </body>
 </html>

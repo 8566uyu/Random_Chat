@@ -5,31 +5,36 @@ import {
     CommunityController,
     CreateController
 } from './community/community.controller';
-import { LoginController,
-    RegisterController } from './auth/auth.controller'
+// import { LoginController,
+//     RegisterController } from './auth/auth.controller'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { Community } from './community/entity/community.entity'
+import { Community } from './domain/community.entity'
 import { AuthModule } from './auth/auth.module';
-import { user } from './auth/entity/user.entity'
+import { user } from './domain/user.entity'
 import { createConnection } from 'mysql2'
+import { UserAuthority } from './domain/user-authority.entity'
+import { ormConfig } from './orm.config'
+import { ConfigModule } from '@nestjs/config'
+import config from './config/config';
 
 
 
 @Module({
-    imports: [ChatBackEndModule, ChatFrontEndModule,
-        TypeOrmModule.forRoot({
-            type: 'mysql',
-            host: 'localhost',
-            port: 3306,
-            username: 'root',
-            password: '0531',
-            database: 'chat',
-            entities: [Community, user],
-            // entities: ["src/bar/entity/**/*.ts", user],
-            synchronize: true, //개발모드에서만 사용하기
+    imports: [
+        ConfigModule.forRoot({
+            load: [config],
+           isGlobal:true
         }),
-        AuthModule],
-    controllers: [CommunityController,CreateController,LoginController,RegisterController],
+        ChatBackEndModule,
+        ChatFrontEndModule,
+        TypeOrmModule.forRootAsync({ useFactory: ormConfig }),
+        AuthModule
+    ],
+    controllers: [CommunityController,
+        CreateController
+        // LoginController,
+        // RegisterController
+    ],
 
 })
 export class AppModule {}

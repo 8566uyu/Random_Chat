@@ -3,7 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { FindOneOptions, Repository } from "typeorm";
 import { UserDTO } from "./dto/user.dto";
 // import { User } from "./user.repository";
-import { user } from "./entity/user.entity"
+import { user } from "../domain/user.entity"
 import * as bcrypt from 'bcrypt';
 
 
@@ -11,7 +11,7 @@ import * as bcrypt from 'bcrypt';
 export class UserService{
   constructor(@InjectRepository(user) private userRepository: Repository<user>){} // Repository<user>로 수정
   
-  async findByFields(options: FindOneOptions<UserDTO>): Promise<UserDTO | undefined> {
+  async findByFields(options: FindOneOptions<UserDTO>): Promise<user | undefined> {
     return await this.userRepository.findOne(options);
   }
   

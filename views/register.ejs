@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>회원가입</title>
+</head>
+<body>
+<h1>회원가입</h1>
+<form action="/api/register" method="POST" id="registerForm">
+    <label for="username">사용자 이름:</label>
+    <input type="text" id="username" name="username" required>
+    <br>
+    <label for="password">비밀번호:</label>
+    <input type="password" id="password" name="password" required>
+    <br>
+    <button type="submit">가입</button>
+</form>
+<a href="/c_index">돌아가기</a>
+
+<script>
+  document.getElementById('registerForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // 기본 폼 제출 동작을 막습니다.
+
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    // 사용자 정보를 객체로 만듭니다.
+    const user = {
+      username: username,
+      password: password
+    };
+
+    // 서버로 POST 요청을 보냅니다.
+    fetch('/api/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log('가입 성공');
+        window.location.href = '/api/login'
+      } else {
+        console.error('가입 실패');
+        // 가입 실패 후 처리를 추가하세요 (예: 오류 메시지 표시)
+      }
+    })
+    .catch(error => {
+      console.error('오류 발생', error);
+      // 오류 처리를 추가하세요
+    });
+  });
+</script>
+
+</body>
+</html>
