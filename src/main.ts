@@ -6,6 +6,7 @@ import { AppModule } from './app.module';
 import { SocketIoAdapter } from './adapters/socket-io.adapters';
 import cookieParser from 'cookie-parser'
 import { ConfigService } from '@nestjs/config'
+import { ValidationPipe } from '@nestjs/common'
 
 async function bootstrap() {
     
@@ -15,6 +16,7 @@ async function bootstrap() {
     app.setBaseViewsDir(join(__dirname, '..', 'views'));
     app.setViewEngine('ejs');
     app.use(cookieParser());
+    app.useGlobalPipes(new ValidationPipe({ transform: true }));
     
     const configService = app.get(ConfigService);
     const port = configService.get<string>('server.port');

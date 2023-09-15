@@ -16,6 +16,7 @@ import { UserAuthority } from './domain/user-authority.entity'
 import { ormConfig } from './orm.config'
 import { ConfigModule } from '@nestjs/config'
 import config from './config/config';
+import { BoardModule } from './board/board.module'
 
 
 
@@ -28,7 +29,8 @@ import config from './config/config';
         ChatBackEndModule,
         ChatFrontEndModule,
         TypeOrmModule.forRootAsync({ useFactory: ormConfig }),
-        AuthModule
+        AuthModule,
+        BoardModule
     ],
     controllers: [CommunityController,
         CreateController
