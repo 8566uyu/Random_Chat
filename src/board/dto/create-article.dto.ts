@@ -7,6 +7,6 @@ export class CreateArticleDto {
   @IsString()
   readonly content: string;
   
-  @IsNumber()
-  readonly password: number;
+  @IsString()
+  readonly password: string;
 }

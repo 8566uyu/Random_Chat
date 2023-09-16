@@ -1,9 +1,8 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { Article } from './domain/article.entity'
 
 function ormConfig(): TypeOrmModuleOptions {
   const commonConf = {
-    SYNCHRONIZE: false,
+    SYNCRONIZE: false,
     ENTITIES: [__dirname + '/domain/*.entity{.ts,.js}'],
     MIGRATIONS: [__dirname + '/migrations/**/*{.ts,.js}'],
     CLI: {
@@ -20,7 +19,7 @@ function ormConfig(): TypeOrmModuleOptions {
     username: 'root',
     password: '0531',
     logging: true,
-    synchronize: commonConf.SYNCHRONIZE,
+    synchronize: commonConf.SYNCRONIZE,
     entities: commonConf.ENTITIES,
     migrations: commonConf.MIGRATIONS,
     // cli: commonConf.CLI,

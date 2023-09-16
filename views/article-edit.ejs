@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>게시물 수정</title>
+</head>
+<body>
+<h1>게시물 수정</h1>
+<form action="/board/update/<%= article.id %>" method="POST" id="articleForm">
+    <label for="title">제목:</label>
+    <input type="text" id="title" name="title" required value="<%= article.title %>">
+    <br>
+    <label for="content">내용:</label>
+    <textarea id="content" name="content" required><%= article.content %></textarea>
+    <br>
+    <label for="password">비밀번호:</label>
+    <input type="text" id="password" name="password" required>
+    <br>
+    <button type="submit">수정</button>
+</form>
+<a href="/c_index">돌아가기</a>
+
+<script>
+  const form = document.getElementById("articleForm");
+  const articleId = window.location.pathname.split('/').pop(); // 현재 페이지 URL에서 게시물 ID를 추출
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    const response = await fetch(`/board/article-detail/${articleId}`, {
+      method: "PUT",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title: formData.get('title'),
+        content: formData.get('content'),
+        password: formData.get('password')
+      }),
+    });
+
+    if (response.ok) {
+      console.log('게시물 수정 성공');
+      window.location.href = `/board/article-detail/${articleId}`;
+    } else {
+      console.error('게시물 수정 실패');
+      alert("게시물 수정에 실패했습니다.");
+    }
+  });
+</script>
+
+</body>
+</html>

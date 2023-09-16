@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>게시물 상세 보기</title>
+</head>
+<body>
+<h2 align="center">제목:<%= article.title %></h2>
+<div>
+    <p align="center">내용:<%= article.content %></p>
+</div>
+    <a href="/board/article-list">목록으로 돌아가기</a>
+    <br>
+    <br>
+    <a href="/board/article-edit/<%= article.id %>">수정</a>
+    <br>
+    <br>
+    <!-- 삭제 버튼을 누르면 호출될 HTML 코드 -->
+    <form action="/board/article-detail/<%= article.id %>/delete" method="POST" id="deleteForm">
+        <button type="submit" id="deleteButton">삭제</button>
+        <br>
+        <label for="password">삭제 비밀번호:</label>
+        <input type="password" id="password" name="password" required>
+        <!-- articleId를 숨겨진 input 필드로 추가 -->
+        <input type="hidden" id="articleId" name="articleId" value="<%= article.id %>">
+    </form>
+
+    <!-- articleLinks 배열을 사용하여 articleId를 가져옴 -->
+<script>
+  const articleLinks = document.querySelectorAll('.edit-link');
+
+  articleLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const articleId = link.getAttribute('data-article-id');
+      window.location.href = `/board/article-detail/${articleId}/delete`;
+    });
+  });
+
+  const deleteForm = document.getElementById('deleteForm');
+  const deleteButton = document.getElementById('deleteButton');
+
+  deleteForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const isConfirmed = confirm('정말로 이 게시물을 삭제하시겠습니까?');
+
+    if (isConfirmed) {
+      const passwordInput = document.getElementById('password');
+      const password = passwordInput.value;
+
+      // 현재 페이지 URL에서 articleId를 추출
+      const articleId = window.location.pathname.split('/').pop();
+
+      // 삭제 요청 보내기
+      const response = await fetch(`/board/article-detail/${articleId}/delete`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ password }),
+      });
+
+      if (response.ok) {
+        alert('게시물이 삭제되었습니다.');
+        window.location.href = '/board/article-list';
+      } else {
+        alert('게시물 삭제에 실패했습니다.');
+      }
+    }
+  });
+</script>
+
+
+</body>
+</html>

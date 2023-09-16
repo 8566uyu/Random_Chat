@@ -12,19 +12,38 @@
 </div>
 <br>
 <div align="center">
-    <a href="/c_create">게시물 작성</a>
+    <a href="/board/create">게시물 작성</a>
 </div>
+
 <br>
 
-<ul>
-    <% for (let post of posts) { %>
-        <li>
-            <a href="/c_post/<%= post._id %>"><%= post.title %></a>
-        </li>
-    <% } %>
-</ul>
+<div align="center">
+    <a href="/board/article-list">게시판목록보기</a>
+</div>
 
 <script>
+
+
+
+  // // 서버로부터 게시물 목록 가져오기
+  // fetch('/board/articles')
+  // .then((response) => response.json())
+  // .then((data) => {
+  //   const articleList = document.getElementById('articleList');
+  //
+  //   // 게시물 목록을 순회하면서 목록 항목 생성
+  //   data.forEach((article) => {
+  //     const listItem = document.createElement('li');
+  //     listItem.textContent = article.title; // 게시물 제목을 표시하거나 다른 필요한 정보를 표시할 수 있습니다.
+  //     articleList.appendChild(listItem);
+  //   });
+  // })
+  // .catch((error) => console.error('게시물 목록을 불러오지 못했습니다:', error));
+
+
+
+
+
 
   // let isUserLoggedIn = false; // 현재 사용자의 로그인 상태 (기본값: 로그아웃)
   // console.log('isUserLoggedIn:', isUserLoggedIn);
@@ -92,87 +111,5 @@
   })
 
 </script>
-
-<!--<script>-->
-<!--  // 로그인 요청을 보내고 토큰을 받는 함수-->
-
-
-<!--  async function login(username, password) {-->
-<!--    try {-->
-<!--      const response = await fetch('/api/login', {-->
-<!--        method: 'POST',-->
-<!--        body: UserDTO,-->
-<!--        headers: {-->
-<!--          'Content-Type': 'application/json',-->
-<!--        },-->
-<!--      });-->
-
-<!--      if (response.ok) {-->
-<!--        const data = await response.json();-->
-<!--        const jwtToken = data.accessToken;-->
-
-<!--        // 토큰을 저장-->
-<!--        localStorage.setItem('jwtToken', jwtToken);-->
-
-<!--        // 로그인 성공-->
-<!--        return true;-->
-<!--      } else {-->
-<!--        console.error('로그인 실패');-->
-<!--        return false;-->
-<!--      }-->
-<!--    } catch (error) {-->
-<!--      console.error('로그인 요청 실패:', error);-->
-<!--      return false;-->
-<!--    }-->
-<!--  }-->
-
-<!--  // 페이지 로드 시 사용자가 로그인되어 있는지 확인-->
-<!--  fetch('/api/authenticate', {-->
-<!--    method: 'GET',-->
-<!--    credentials: 'include',-->
-<!--  })-->
-<!--  .then((response) => {-->
-<!--    if (response.ok) {-->
-<!--      return response.json();-->
-<!--    }-->
-<!--    return null;-->
-<!--  })-->
-<!--  .then((userData) => {-->
-<!--    if (userData) {-->
-<!--      isUserLoggedIn = true;-->
-
-<!--      // 사용자 정보를 클라이언트 측에 저장-->
-<!--      const userInformation = {-->
-<!--        id: userData.id,-->
-<!--        username: userData.username,-->
-<!--        // 다른 사용자 정보 필드도 필요한 경우 여기에 추가-->
-<!--      };-->
-<!--      localStorage.setItem('userInformation', JSON.stringify(userInformation));-->
-
-<!--      // 사용자가 로그인되어 있는 경우 로그인 링크를 로그아웃 링크로 변경-->
-<!--      const loginLink = document.getElementById('loginLink');-->
-<!--      if (loginLink) {-->
-<!--        loginLink.textContent = '로그아웃';-->
-<!--        loginLink.href = '#'; // 로그아웃 버튼에는 href 필요 없음-->
-<!--        loginLink.addEventListener('click', async function (event) {-->
-<!--          event.preventDefault();-->
-<!--          // 로그아웃 요청을 서버로 보내고 성공하면 페이지를 새로고침-->
-<!--          const response = await fetch('/api/logout', {-->
-<!--            method: 'POST',-->
-<!--            credentials: 'include',-->
-<!--          });-->
-<!--          if (response.ok) {-->
-<!--            // 사용자 정보를 삭제하고 페이지를 새로 고침-->
-<!--            localStorage.removeItem('userInformation');-->
-<!--            window.location.reload();-->
-<!--          }-->
-<!--        });-->
-<!--      }-->
-<!--    }-->
-<!--  });-->
-
-<!--</script>-->
-
-
 </body>
 </html>

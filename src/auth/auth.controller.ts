@@ -84,17 +84,7 @@ export class AuthController {
     return user;
   }
   
- 
   
-  // @Post('/logout')
-  // logout(@Req() req: Request, @Res() res: Response): any {
-  //   res.cookie('jwt', '', {
-  //     maxAge: 0
-  //   })
-  //   return res.send({
-  //     message: 'success'
-  //   })
-  // }
   
 }
 

@@ -5,7 +5,7 @@ export class Article {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   id: number;
   
-  @Column('varchar', { length: 50 })
+  @Column({ default: '제목 없음' })
   title: string;
   
   @Column('varchar', { length: 1000 })

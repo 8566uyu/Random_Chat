@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>게시판 목록</title>
+</head>
+<body>
+<h1 align="center">게시판 목록 </h1>
+
+<ul>
+    <% for (let article of articles) { %>
+        <li>
+            <a href="#" class="article-link" data-article-id="<%= article.id %>"><%= article.title %></a>
+            <span>작성자: <%= article.author %></span>
+            <span>작성일: <%= article.createdAt.toDateString() %></span>
+        </li>
+    <% } %>
+
+</ul>
+
+<div>
+    <a href="/c_index">돌아가기</a>
+</div>
+</body>
+<script>
+  // 클릭 이벤트 핸들러를 추가하여 개별 게시물 페이지로 이동
+  const articleLinks = document.querySelectorAll('.article-link');
+
+  articleLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const articleId = link.getAttribute('data-article-id');
+      window.location.href = `/board/article-detail/${articleId}`;
+    });
+  });
+</script>
+</html>

@@ -30,20 +30,22 @@ export class BoardService {
   
 
   
-  createArticle(title: string, content: string, password: number) {
+  createArticle(title: string, content: string, password: string) {
+    console.log('Received data:', { title, content, password });
     this.articleRepository.insert({
       author: 'test',
       title,
       content,
-      password: password.toString(),
+      password,
     });
   }
+  
   
   async updateArticle(
       id: number,
       title: string,
       content: string,
-      password: number,
+      password: string,
   ) {
     
     
@@ -53,13 +55,13 @@ export class BoardService {
     this.articleRepository.update(id, { title, content });
   }
   
-  async deleteArticle(id: number, password: number) {
+  async deleteArticle(id: number, password: string) {
     await this.verifyPassword(id, password);
     
     await this.articleRepository.softDelete(id);
   }
   
-  private async verifyPassword(id: number, password: number) {
+  private async verifyPassword(id: number, password: string) {
     // 굳이 노출될 필요 없는 메소드는 private하게
     const article = await this.articleRepository.findOne({
       where: { id, deletedAt: null },
@@ -68,7 +70,7 @@ export class BoardService {
     if (_.isNil(article)) {
       throw new NotFoundException('Article not found. id: ' + id);
     }
-    if (article.password !== password.toString()) {
+    if (article.password !== password) {
       throw new UnauthorizedException(`Password is not corrected. id: ${id}`);
     }
   }

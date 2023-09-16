@@ -74,7 +74,7 @@ export class CommunityController {
 @Controller('c_create')
 export class CreateController {
   @Get() // GET 요청에 대한 라우트를 추가
-  @Render('c_create') // c_create.ejs 템플릿을 렌더링합니다.
+  @Render('c_create') // article.ejs 템플릿을 렌더링합니다.
   getCreatePage() {
     const initialFormData = {
       title: '',       // 초기 제목 설정

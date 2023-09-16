@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>게시물 작성</title>
+</head>
+<body>
+<h1>게시물 작성</h1>
+<form action="/board/create" method="POST" id="articleForm">
+    <label for="title">제목:</label>
+    <input type="text" id="title" name="title" required>
+    <br>
+    <label for="content">내용:</label>
+    <textarea id="content" name="content" required></textarea>
+    <br>
+    <label for="password">비밀번호:</label>
+    <input type="text" id="password" name="password" required>
+    <br>
+    <button type="submit">작성</button>
+</form>
+<a href="/c_index">돌아가기</a>
+
+<script>
+  const form = document.getElementById("articleForm");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    for (const [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
+    }
+
+    const response = await fetch("/board/create", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json', // JSON 데이터 전송을 위해 헤더 설정
+      },
+      body: JSON.stringify({
+        title: formData.get('title'),
+        content: formData.get('content'),
+        password: formData.get('password')
+      }), // JSON 데이터로 변환하여 전송
+    });
+
+    if (response.ok) {
+      console.log('게시물 작성 성공'); // 성공 로그
+      window.location.href = '/c_index'; // 작성 후 게시물 목록 페이지로 리디렉션
+    } else {
+      console.error('게시물 작성 실패'); // 실패 로그
+      alert("게시물 작성에 실패했습니다.");
+    }
+  });
+</script>
+</body>
+</html>
