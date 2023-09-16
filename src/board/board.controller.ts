@@ -90,7 +90,7 @@ export class BoardController {
   
   
   
-  @Put('/board/article-edit/:id')
+  @Put('article-edit/:id')
   async updateArticle (
       @Param('id') articleId: number,
       @Body() data: UpdateArticleDto,
@@ -114,9 +114,8 @@ export class BoardController {
     return await this.boardService.deleteArticle(articleId, data.password);
   }
   
- 
-
+  
+  
   
   
 }
-
