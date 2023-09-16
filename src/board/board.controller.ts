@@ -89,15 +89,8 @@ export class BoardController {
   // }
   
   
-  @Get('/article-edit/:id')
-  @Render('article-edit') // 게시물 수정 페이지 렌더링
-  async getEditArticlePage (@Param('id') articleId: number) {
-    // 게시물 수정 페이지를 렌더링하는 데 필요한 데이터를 가져옵니다.
-    const article = await this.boardService.getArticleById(articleId);
-    return { article };
-  }
   
-  @Put('article-edit/:id')
+  @Put('/board/article-edit/:id')
   async updateArticle (
       @Param('id') articleId: number,
       @Body() data: UpdateArticleDto,

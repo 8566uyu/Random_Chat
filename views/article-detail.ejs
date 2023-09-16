@@ -2,30 +2,80 @@
 <html>
 <head>
     <title>게시물 상세 보기</title>
+    <style>
+      /* 수정 가능한 필드에 테두리 스타일 추가 */
+      [contentEditable="true"] {
+        border: 1px solid #ccc;
+        padding: 5px;
+        }
+    </style>
 </head>
 <body>
-<h2 align="center">제목:<%= article.title %></h2>
+<h2 align="center" data-article-id="<%= article.id %>">제목:<%= article.title %></h2>
 <div>
     <p align="center">내용:<%= article.content %></p>
 </div>
-    <a href="/board/article-list">목록으로 돌아가기</a>
+<a href="/board/article-list">목록으로 돌아가기</a>
+<br>
+<br>
+<button type="button" onclick="enableEditing()">수정</button>
+<button type="button" onclick="saveChanges()">저장</button>
+<br>
+<br>
+<!-- 삭제 버튼을 누르면 호출될 HTML 코드 -->
+<form action="/board/article-detail/<%= article.id %>/delete" method="POST" id="deleteForm">
+    <button type="submit" id="deleteButton">삭제</button>
     <br>
-    <br>
-    <a href="/board/article-edit/<%= article.id %>">수정</a>
-    <br>
-    <br>
-    <!-- 삭제 버튼을 누르면 호출될 HTML 코드 -->
-    <form action="/board/article-detail/<%= article.id %>/delete" method="POST" id="deleteForm">
-        <button type="submit" id="deleteButton">삭제</button>
-        <br>
-        <label for="password">삭제 비밀번호:</label>
-        <input type="password" id="password" name="password" required>
-        <!-- articleId를 숨겨진 input 필드로 추가 -->
-        <input type="hidden" id="articleId" name="articleId" value="<%= article.id %>">
-    </form>
+    <label for="password">삭제 비밀번호:</label>
+    <input type="password" id="password" name="password" required>
+    <!-- articleId를 숨겨진 input 필드로 추가 -->
+    <input type="hidden" id="articleId" name="articleId" value="<%= article.id %>">
+</form>
 
-    <!-- articleLinks 배열을 사용하여 articleId를 가져옴 -->
+<!-- JavaScript 코드 추가 -->
 <script>
+
+  function enableEditing() {
+    // 제목과 내용 입력 필드를 활성화
+    const titleInput = document.querySelector('h2');
+    const contentInput = document.querySelector('p');
+    titleInput.contentEditable = true;
+    contentInput.contentEditable = true;
+  }
+
+  async function saveChanges() {
+    // 수정한 데이터 가져오기
+    const titleInput = document.querySelector('h2');
+    const contentInput = document.querySelector('p');
+    const newTitle = titleInput.textContent;
+    const newContent = contentInput.textContent;
+
+    // 현재 페이지의 URL에서 게시물 ID 추출
+    const currentURL = window.location.href;
+    const articleId = currentURL.split('/').pop();
+
+    // 비밀번호 입력 받기
+    const password = prompt('게시물을 저장하려면 비밀번호를 입력하세요:');
+
+    if (password !== null) { // 사용자가 취소 버튼을 누르지 않았을 때
+      // 서버로 데이터 전송
+      const response = await fetch(`/board/article-edit/${articleId}`, {
+        method: 'PUT', // PUT 또는 POST 사용
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title: newTitle, content: newContent, password }),
+      });
+
+      if (response.ok) {
+        alert('변경사항이 저장되었습니다.');
+      } else {
+        alert('변경사항을 저장하는 데 실패했습니다.');
+      }
+    }
+  }
+
+// 삭제하기
   const articleLinks = document.querySelectorAll('.edit-link');
 
   articleLinks.forEach(link => {
@@ -68,6 +118,12 @@
       }
     }
   });
+
+
+
+
+
+
 </script>
 
 
