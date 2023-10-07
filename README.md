@@ -1,6 +1,7 @@
 ## Random_Chat
 
-![ezgif-2-4301213509](https://github.com/8566uyu/Socket.io_Chat/assets/121207285/49a288bc-d6f2-4e39-bd90-cabfa60773a6)
+![ezgif com-video-to-gif](https://github.com/8566uyu/Random_Chat/assets/121207285/c0cd6604-7a72-43d3-8bf7-348f3e5fd2be)
+
 
 <br>
 
