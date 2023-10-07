@@ -90,7 +90,7 @@
 
 ## 🪄 프로젝트 확인
 ```
-https://github.com/8566uyu/Socket.io_Chat.git
+[https://github.com/8566uyu/Socket.io_Chat.git]
 ```
 
 ```
